@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}
+    TaskLaunchr - Detail View
+{% endblock title %}
+{% block content %}
+    <main>
+        <div>
+            <h1>{{ todolist.name }}</h1>
+            <p>{{ todolist.description }}</p>
+            <div class="actions">
+                <a href="{% url 'todo_list_update' todolist.id %}">Edit List</a> |
+                <a href="{% url 'todo_list_delete' todolist.id %}">Delete List</a>
+            </div>
+            <h2>Tasks</h2>
+            {% if todolist.items.exists %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Due Date</th>
+                            <th>Completed</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in todolist.items.all|dictsort:"due_date" %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'todo_item_update' item.id %}">{{ item.task }}</a>
+                                </td>
+                                <td>{{ item.due_date }}</td>
+                                <td>
+                                    <input type="checkbox" {% if item.completed %}checked{% endif %} disabled>
+                                </td>
+                                <td>
+                                    <a class="table-link" href="{% url 'todo_item_update' item.id %}">Edit</a>
+                                </td>
+                            </tr>
+                            {% if item.notes %}
+                                <tr>
+                                    <td colspan="4">{{ item.notes }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>You don't have any tasks yet.</p>
+            {% endif %}
+        </div>
+    </main>
+{% endblock content %}

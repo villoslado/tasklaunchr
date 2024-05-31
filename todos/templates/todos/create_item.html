@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}
+    TaskLaunchr - Create Task
+{% endblock title %}
+{% block content %}
+    <main>
+        <div>
+            <h1>Create New Item</h1>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                {% if form.errors %}
+                    <div class="form-errors">
+                        <ul>
+                            {% for field in form %}
+                                {% for error in field.errors %}<li>{{ error }}</li>{% endfor %}
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                <button type="submit">Create</button>
+                <a href="{% url 'todo_list_list' %}" class="button">Cancel</a>
+            </form>
+        </div>
+    </main>
+{% endblock content %}

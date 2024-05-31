@@ -21,7 +21,7 @@ from django.shortcuts import redirect
 
 
 def redirect_to_list(request):
-    return redirect("home")
+    return redirect("todo_list_list")
 
 
 urlpatterns = [

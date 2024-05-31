@@ -7,27 +7,70 @@
         <meta name="description"
               content="This is a base html for use across the website.">
         <meta name="keywords" content="to-do, project, management, tasks">
-        <link rel="stylesheet" href="{% static "css/todos.css" %}">
+        <link rel="stylesheet" href="{% static 'css/todos.css' %}">
         <title>
             {% block title %}
+                TaskLaunchr
             {% endblock title %}
         </title>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var images = [
+                    "{% static 'images/pic1.jpg' %}",
+                    "{% static 'images/pic2.jpg' %}",
+                    "{% static 'images/pic3.jpg' %}",
+                    "{% static 'images/pic4.jpg' %}",
+                    "{% static 'images/pic5.jpg' %}",
+                    "{% static 'images/pic6.jpg' %}",
+                    "{% static 'images/pic7.jpg' %}",
+                    "{% static 'images/pic8.jpg' %}",
+                    "{% static 'images/pic9.jpg' %}",
+                    "{% static 'images/pic10.jpg' %}",
+                    "{% static 'images/pic11.jpg' %}",
+                    "{% static 'images/pic12.jpg' %}"
+                ];
+                var randomImage = document.getElementById('random-image');
+                var randomIndex = Math.floor(Math.random() * images.length);
+                randomImage.src = images[randomIndex];
+            });
+        </script>
     </head>
     <body>
-        <header>
-            <div class="logo">
-                <span class="logo-text">TaskLaunchr</span>
-            </div>
+        <header class="website-header">
+            <div class="logo">TaskLaunchr</div>
             <nav class="main-nav">
                 <ul class="nav-list">
-                    <li class="nav-item">a</li>
-                    <li class="nav-item">b</li>
-                    <li class="nav-item">c</li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'todo_list_list' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'todo_list_create' %}">+ New List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'todo_item_create' %}">+ New Item</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </nav>
         </header>
-        {% block content %}
-        {% endblock content %}
+        <main>
+            {% block content %}
+            {% endblock content %}
+        </main>
+        <div id="random-image-container">
+            <img id="random-image" src="" alt="Random Image">
+        </div>
         <footer>
             Productivity made simple
         </footer>

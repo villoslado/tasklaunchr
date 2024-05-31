@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}
+    TaskLaunchr - My Lists
+{% endblock title %}
+{% block content %}
+    <main>
+        <div>
+            <h1>My Lists</h1>
+            {% if todo_list_list %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Number of Tasks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for list in todo_list_list %}
+                            <tr>
+                                <td>
+                                    <a class="table-link" href="{% url 'todo_list_detail' list.id %}">{{ list.name }}</a>
+                                </td>
+                                <td>{{ list.items.count }}</td>
+                            </tr>
+                            {% if list.description %}
+                                <tr>
+                                    <td colspan="2">{{ list.description }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>You don't have any lists.</p>
+            {% endif %}
+        </div>
+    </main>
+{% endblock content %}

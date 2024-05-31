@@ -20,7 +20,7 @@ def signup(request):
                     password=password,
                 )
                 login(request, user)
-                return redirect("home")
+                return redirect("todo_list_list")
             else:
                 form.add_error("password", "Passwords do not match")
     else:
@@ -56,7 +56,7 @@ def user_login(request):
 
             if user is not None:
                 login(request, user)
-                return redirect("home")
+                return redirect("todo_list_list")
             else:
                 form.add_error(None, "Invalid login credentials")
     else:
