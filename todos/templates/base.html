@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description"
+              content="This is a base html for use across the website.">
+        <meta name="keywords" content="to-do, project, management, tasks">
+        <link rel="stylesheet" href="{% static "css/todos.css" %}">
+        <title>
+            {% block title %}
+            {% endblock title %}
+        </title>
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <span class="logo-text">TaskLaunchr</span>
+            </div>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">a</li>
+                    <li class="nav-item">b</li>
+                    <li class="nav-item">c</li>
+                </ul>
+            </nav>
+        </header>
+        {% block content %}
+        {% endblock content %}
+        <footer>
+            Productivity made simple
+        </footer>
+    </body>
+</html>
