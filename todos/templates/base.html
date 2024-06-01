@@ -47,9 +47,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'todo_list_create' %}">+ New List</a>
                         </li>
-                        <li class="nav-item">
+                        {% comment %} <li class="nav-item">
                             <a class="nav-link" href="{% url 'todo_item_create' %}">+ New Item</a>
-                        </li>
+                        </li> {% endcomment %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
                         </li>

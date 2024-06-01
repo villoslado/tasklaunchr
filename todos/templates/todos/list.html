@@ -11,6 +11,7 @@
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Description</th>
                             <th>Number of Tasks</th>
                         </tr>
                     </thead>
@@ -20,13 +21,9 @@
                                 <td>
                                     <a class="table-link" href="{% url 'todo_list_detail' list.id %}">{{ list.name }}</a>
                                 </td>
+                                <td>{{ list.description }}</td>
                                 <td>{{ list.items.count }}</td>
                             </tr>
-                            {% if list.description %}
-                                <tr>
-                                    <td colspan="2">{{ list.description }}</td>
-                                </tr>
-                            {% endif %}
                         {% endfor %}
                     </tbody>
                 </table>

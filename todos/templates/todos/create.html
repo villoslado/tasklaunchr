@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block title %}
-    TaskLaunchr - Create New List
+    TaskLaunchr - Create List
 {% endblock title %}
 {% block content %}
-    <main>
+    <main class="form-page">
         <div>
             <h1>Create New List</h1>
             <form method="post">
@@ -19,8 +19,8 @@
                         </ul>
                     </div>
                 {% endif %}
-                <button type="submit">Create</button>
-                <a href="{% url 'todo_list_list' %}" class="button">Cancel</a>
+                <button type="submit" class="button create form-button">Create</button>
+                <a href="{% url 'todo_list_list' %}" class="button cancel form-button">Cancel</a>
             </form>
         </div>
     </main>

@@ -15,7 +15,7 @@ main {
 }
 
 header {
-    margin-bottom: 50px;
+    margin-bottom: 25px;
 }
 
 footer {
@@ -24,7 +24,7 @@ footer {
     background-color: #1a1a1a;
     color: #FFFAFA;
     margin-top: 50px;
-    text-align: center;
+    text-align: left;
 }
 
 h1 {
@@ -127,7 +127,7 @@ button:hover, button:focus {
     width: 100%;
     height: 400px;
     overflow: hidden;
-    margin: 50px 0px;
+    margin: 25px 0px;
     border-radius: 2px;
     box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
@@ -152,4 +152,74 @@ button:hover, button:focus {
     .nav-link {
         font-size: 1.2em;
     }
+}
+
+.button {
+    font-family: Helvetica, sans-serif;
+    padding: 8px 16px;
+    background: #dfe1e5;
+    font-size: 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    color: #1a1a1a;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 150px; /* Set a fixed width for consistency */
+    text-align: center; /* Center the text */
+}
+
+.button:hover, .button:focus {
+    color: #081c15;
+    background-color: #b3d89c; /* Green color on hover */
+}
+
+.button.delete {
+    background-color: #dfe1e5;
+}
+
+.button.delete:hover, .button.delete:focus {
+    background-color: #a71e34; /* Red color on hover */
+    color: whitesmoke; /* Text color on hover */
+}
+
+.button.cancel {
+    background-color: #dfe1e5;
+}
+
+.button.cancel:hover, .button.cancel:focus {
+    background-color: #a71e34; /* Red color on hover */
+    color: whitesmoke; /* Text color on hover */
+}
+
+.button.create {
+    background-color: #dfe1e5;
+}
+
+.button.create:hover, .button.create:focus {
+    background-color: #b3d89c; /* Green color on hover */
+    color: #081c15; /* Text color on hover */
+}
+
+/* Specific styles for forms to ensure consistent button height */
+.form-page .form-button {
+    height: 40px; /* Set a fixed height for consistency */
+    line-height: 40px; /* Set a fixed line-height for consistency */
+    padding: 0; /* Remove default padding */
+}
+
+/* Specific styles for buttons in delete.html */
+.delete-page .delete-button {
+    height: 40px; /* Set a fixed height for consistency */
+    line-height: 40px; /* Set a fixed line-height for consistency */
+    padding: 0; /* Remove default padding */
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.delete-page .button.cancel:hover, .delete-page .button.cancel:focus {
+    background-color: #b3d89c; /* Green color on hover */
+    color: #081c15; /* Text color on hover */
 }

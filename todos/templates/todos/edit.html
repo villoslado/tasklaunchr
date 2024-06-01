@@ -3,7 +3,7 @@
     TaskLaunchr - Update List Name
 {% endblock title %}
 {% block content %}
-    <main>
+    <main class="form-page">
         <div>
             <h1>Update List Name</h1>
             <form method="post">
@@ -19,8 +19,9 @@
                         </ul>
                     </div>
                 {% endif %}
-                <button type="submit">Update</button>
-                <a href="{% url 'todo_list_detail' todolist.id %}" class="button">Cancel</a>
+                <button type="submit" class="button create form-button">Update</button>
+                <a href="{% url 'todo_list_detail' todolist.id %}"
+                   class="button cancel form-button">Cancel</a>
             </form>
         </div>
     </main>

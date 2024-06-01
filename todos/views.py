@@ -9,7 +9,7 @@ from todos.forms import TodoListForm, TodoItemForm
 @login_required
 def todo_list_list(request: HttpRequest) -> HttpResponse:
     todos = TodoList.objects.all()
-    return render(request, "todos/list.html", {"todolist_list": todos})
+    return render(request, "todos/list.html", {"todo_list_list": todos})
 
 
 # View to show details of a specific to-do list
@@ -34,15 +34,17 @@ def create_list(request: HttpRequest) -> HttpResponse:
 
 # View to create a new to-do item
 @login_required
-def create_item(request: HttpRequest) -> HttpResponse:
+def create_item(request: HttpRequest, list_id=None) -> HttpResponse:
+    todolist = get_object_or_404(TodoList, id=list_id)
     if request.method == "POST":
         form = TodoItemForm(request.POST)
         if form.is_valid():
             todoitem = form.save()
             return redirect("todo_list_detail", id=todoitem.todolist.id)
     else:
-        form = TodoItemForm()
-    return render(request, "todos/create_item.html", {"form": form})
+        initial_data = {"todolist": todolist}
+        form = TodoItemForm(initial=initial_data)
+    return render(request, "todos/create_item.html", {"form": form, "list_id": list_id})
 
 
 # View to edit an existing to-do list
@@ -94,4 +96,4 @@ def delete_list(request: HttpRequest, id: int) -> HttpResponse:
     if request.method == "POST":
         todolist.delete()
         return redirect("todo_list_list")
-    return render(request, "todos/delete.html")
+    return render(request, "todos/delete.html", {"id": id})
