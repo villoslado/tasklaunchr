@@ -8,14 +8,14 @@ from todos.forms import TodoListForm, TodoItemForm
 # View to list all to-do lists
 @login_required
 def todo_list_list(request: HttpRequest) -> HttpResponse:
-    todos = TodoList.objects.all()
+    todos = TodoList.objects.filter(user=request.user)
     return render(request, "todos/list.html", {"todo_list_list": todos})
 
 
 # View to show details of a specific to-do list
 @login_required
 def show_list(request: HttpRequest, id: int) -> HttpResponse:
-    todolist = get_object_or_404(TodoList, id=id)
+    todolist = get_object_or_404(TodoList, id=id, user=request.user)
     return render(request, "todos/detail.html", {"todolist": todolist})
 
 
@@ -25,7 +25,9 @@ def create_list(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
         form = TodoListForm(request.POST)
         if form.is_valid():
-            todolist = form.save()
+            todolist = form.save(commit=False)
+            todolist.user = request.user
+            todolist.save()
             return redirect("todo_list_detail", id=todolist.id)
     else:
         form = TodoListForm()
@@ -35,11 +37,14 @@ def create_list(request: HttpRequest) -> HttpResponse:
 # View to create a new to-do item
 @login_required
 def create_item(request: HttpRequest, list_id=None) -> HttpResponse:
-    todolist = get_object_or_404(TodoList, id=list_id)
+    todolist = get_object_or_404(TodoList, id=list_id, user=request.user)
     if request.method == "POST":
         form = TodoItemForm(request.POST)
         if form.is_valid():
-            todoitem = form.save()
+            todoitem = form.save(commit=False)
+            todoitem.user = request.user
+            todoitem.todolist = todolist
+            todoitem.save()
             return redirect("todo_list_detail", id=todoitem.todolist.id)
     else:
         initial_data = {"todolist": todolist}
@@ -50,7 +55,7 @@ def create_item(request: HttpRequest, list_id=None) -> HttpResponse:
 # View to edit an existing to-do list
 @login_required
 def edit_list(request: HttpRequest, id: int) -> HttpResponse:
-    todolist = get_object_or_404(TodoList, id=id)
+    todolist = get_object_or_404(TodoList, id=id, user=request.user)
     if request.method == "POST":
         form = TodoListForm(request.POST, instance=todolist)
         if form.is_valid():
@@ -71,7 +76,7 @@ def edit_list(request: HttpRequest, id: int) -> HttpResponse:
 # View to edit an existing to-do item
 @login_required
 def edit_item(request: HttpRequest, id: int) -> HttpResponse:
-    todoitem = get_object_or_404(TodoItem, id=id)
+    todoitem = get_object_or_404(TodoItem, id=id, user=request.user)
     if request.method == "POST":
         form = TodoItemForm(request.POST, instance=todoitem)
         if form.is_valid():
@@ -92,7 +97,7 @@ def edit_item(request: HttpRequest, id: int) -> HttpResponse:
 # View to delete a to-do list
 @login_required
 def delete_list(request: HttpRequest, id: int) -> HttpResponse:
-    todolist = get_object_or_404(TodoList, id=id)
+    todolist = get_object_or_404(TodoList, id=id, user=request.user)
     if request.method == "POST":
         todolist.delete()
         return redirect("todo_list_list")
