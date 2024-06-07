@@ -21,6 +21,23 @@ class SignUpForm(forms.Form):
             raise ValidationError("Email is already in use.")
         return email
 
+    def clean_username(self):
+        username = self.cleaned_data["username"]
+        if User.objects.filter(username=username).exists():
+            raise ValidationError("This username is already taken.")
+        return username
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        password_confirmation = cleaned_data.get("password_confirmation")
+
+        if password and password_confirmation:
+            if password != password_confirmation:
+                self.add_error("password_confirmation", "Passwords do not match.")
+
+        return cleaned_data
+
 
 class LoginForm(forms.Form):
     username_or_email = forms.CharField(max_length=254)
