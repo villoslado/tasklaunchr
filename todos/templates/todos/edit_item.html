@@ -12,6 +12,7 @@
                     <div class="form-field">
                         {{ field.label_tag }}
                         {{ field }}
+                        {% comment %} {% if field.help_text %}<small class="form-text text-muted">{{ field.help_text }}</small>{% endif %} {% endcomment %}
                         {% if field.errors %}
                             <div class="form-errors">
                                 <ul>
