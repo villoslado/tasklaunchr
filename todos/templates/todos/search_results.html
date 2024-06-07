@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}
+    TaskLaunchr - Search Results
+{% endblock title %}
+{% block content %}
+    <main>
+        <div>
+            <h1>Search Results</h1>
+            {% if query %}
+                <p>Results for "{{ query }}":</p>
+                {% if results %}
+                    <ul>
+                        {% for item in results %}
+                            <li>
+                                <a href="{% url 'todo_item_update' item.id %}">{{ item.task }}</a>
+                                {% if item.notes %}<p>{{ item.notes }}</p>{% endif %}
+                                <p>Due: {{ item.due_date }}</p>
+                                <p>List: {{ item.todolist }}</p>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No results found.</p>
+                {% endif %}
+            {% else %}
+                <p>Please enter a search term.</p>
+            {% endif %}
+        </div>
+    </main>
+{% endblock content %}

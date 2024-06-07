@@ -24,11 +24,11 @@ class TodoItemForm(ModelForm):
     class Meta:
         model = TodoItem
         fields = [
-            "task",
             "todolist",
+            "task",
             "notes",
-            "completed",
             "due_date",
+            "completed",
         ]
         widgets = {
             "due_date": forms.DateInput(attrs={"type": "date"}),

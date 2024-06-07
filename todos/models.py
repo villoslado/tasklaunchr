@@ -24,8 +24,8 @@ class TodoItem(models.Model):
         on_delete=models.CASCADE,
     )
     notes = models.TextField(blank=True, null=True)
-    completed = models.BooleanField(default=False)
     due_date = models.DateTimeField(blank=True, null=True)
+    completed = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(
         User,

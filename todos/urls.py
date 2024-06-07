@@ -7,6 +7,8 @@ from todos.views import (
     edit_list,
     edit_item,
     delete_list,
+    search,
+    delete_item,
 )
 
 urlpatterns = [
@@ -17,4 +19,6 @@ urlpatterns = [
     path("<int:id>/edit/", edit_list, name="todo_list_update"),
     path("items/<int:id>/edit/", edit_item, name="todo_item_update"),
     path("<int:id>/delete/", delete_list, name="todo_list_delete"),
+    path("search/", search, name="search"),
+    path("items/<int:id>/delete/", delete_item, name="todo_item_delete"),
 ]

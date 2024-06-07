@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}
+    TaskLaunchr - Delete Item
+{% endblock title %}
+{% block content %}
+    <main class="delete-page">
+        <div>
+            <h1>Are you sure you want to delete this item?</h1>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="button delete delete-button">Delete</button>
+                <a href="{% url 'todo_list_detail' todoitem.todolist.id %}"
+                   class="button cancel delete-button">Cancel</a>
+            </form>
+        </div>
+    </main>
+{% endblock content %}

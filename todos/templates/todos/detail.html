@@ -21,7 +21,6 @@
                             <th>Task</th>
                             <th>Notes</th>
                             <th>Due Date</th>
-                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,13 +30,10 @@
                                     <input type="checkbox" {% if item.completed %}checked{% endif %} disabled>
                                 </td>
                                 <td>
-                                    <a href="{% url 'todo_item_update' item.id %}">{{ item.task }}</a>
+                                    <a href="{% url 'todo_item_update' item.id %}" class="table-link">{{ item.task }}</a>
                                 </td>
                                 <td>{{ item.notes }}</td>
-                                <td>{{ item.due_date }}</td>
-                                <td>
-                                    <a class="table-link" href="{% url 'todo_item_update' item.id %}">Edit</a>
-                                </td>
+                                <td>{{ item.due_date|date:"M j, Y" }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>

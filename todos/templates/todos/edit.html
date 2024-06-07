@@ -6,22 +6,33 @@
     <main class="form-page">
         <div>
             <h1>Update List Name</h1>
-            <form method="post">
+            <form method="post" class="form-container">
                 {% csrf_token %}
-                {{ form.as_p }}
-                {% if form.errors %}
+                {% for field in form %}
+                    <div class="form-field">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="form-errors">
+                                <ul>
+                                    {% for error in field.errors %}<li>{{ error }}</li>{% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                {% if form.non_field_errors %}
                     <div class="form-errors">
                         <ul>
-                            {% for field in form %}
-                                {% for error in field.errors %}<li>{{ error }}</li>{% endfor %}
-                            {% endfor %}
                             {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
                         </ul>
                     </div>
                 {% endif %}
-                <button type="submit" class="button create form-button">Update</button>
-                <a href="{% url 'todo_list_detail' todolist.id %}"
-                   class="button cancel form-button">Cancel</a>
+                <div class="button-container">
+                    <button type="submit" class="button create form-button">Update</button>
+                    <a href="{% url 'todo_list_detail' todolist.id %}"
+                       class="button cancel form-button">Cancel</a>
+                </div>
             </form>
         </div>
     </main>

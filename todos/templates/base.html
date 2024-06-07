@@ -38,6 +38,16 @@
     <body>
         <header class="website-header">
             <div class="logo">TaskLaunchr</div>
+            {% if user.is_authenticated %}
+                <form method="GET" action="{% url 'search' %}" class="search-form">
+                    <input type="text"
+                           name="q"
+                           placeholder="Search tasks or notes..."
+                           class="search-input"
+                           required>
+                    <button type="submit" class="search-button">Search</button>
+                </form>
+            {% endif %}
             <nav class="main-nav">
                 <ul class="nav-list">
                     {% if user.is_authenticated %}
@@ -47,9 +57,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'todo_list_create' %}">+ New List</a>
                         </li>
-                        {% comment %} <li class="nav-item">
-                            <a class="nav-link" href="{% url 'todo_item_create' %}">+ New Item</a>
-                        </li> {% endcomment %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
                         </li>

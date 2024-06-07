@@ -49,7 +49,9 @@ def user_login(request):
                 try:
                     user = User.objects.get(email=username_or_email)
                     user = authenticate(
-                        request, username=user.username, password=password
+                        request,
+                        username=user.username,
+                        password=password,
                     )
                 except User.DoesNotExist:
                     user = None
