@@ -1,4 +1,4 @@
-# Django Todo App 📝
+# Tasklaunchr 📝
 
 This Django-based web application provides a system for managing todo lists and items. Built using Django and various Python libraries, it offers an interface for users to create, edit, and manage their todo lists and items.
 
